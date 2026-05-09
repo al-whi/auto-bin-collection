@@ -23,7 +23,7 @@ SERVICE_LABELS = {
     "Garden":    "🌿 Garden waste collection",
 }
 
-REMINDER_HOURS_BEFORE = 7  # Reminder the evening before
+REMINDER_HOURS_BEFORE = 8  # Reminder the evening before
 
 
 def fetch_collections():
@@ -59,8 +59,10 @@ def build_calendar(collections):
         label = SERVICE_LABELS.get(service, f"🗑️ {service} collection")
 
         # Determine recurrence interval from schedule description
-        # e.g. "Monday every week" or "Monday every other week"
-        if "every other week" in schedule.lower():
+        # e.g. "Monday every week" or "Monday every other week" or "Monday every 3rd week"
+        if "every 3" in schedule.lower():
+            interval_days = 21
+        elif "every other week" in schedule.lower():
             interval_days = 14
         elif "every week" in schedule.lower():
             interval_days = 7
